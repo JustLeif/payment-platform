@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Package from 'lucide-svelte/icons/package';
 	import Menu from 'lucide-svelte/icons/menu';
-	import FolderOpen from 'lucide-svelte/icons/folder';
 	import Cog from 'lucide-svelte/icons/cog';
+	import Image from 'lucide-svelte/icons/image';
 	import LogOut from 'lucide-svelte/icons/log-out';
-	import DatabaseZap from 'lucide-svelte/icons/database-zap';
 	import Slash from 'svelte-radix/Slash.svelte';
 	import Gauge from 'lucide-svelte/icons/gauge';
 
@@ -67,6 +66,15 @@
 						Products
 					</a>
 					<a
+						href="/dashboard/branding"
+						class="mx-4 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+						class:text-primary={path.startsWith('/dashboard/branding')}
+						class:bg-muted={path.startsWith('/dashboard/branding')}
+					>
+						<Image class="h-4 w-4" />
+						Branding
+					</a>
+					<a
 						href="/dashboard/settings"
 						class="mx-4 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 						class:text-primary={path.startsWith('/dashboard/settings')}
@@ -74,15 +82,6 @@
 					>
 						<Cog class="h-4 w-4" />
 						Settings
-					</a>
-					<a
-						href="/dashboard/admin"
-						class="mx-4 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-						class:text-primary={path.startsWith('/dashboard/admin')}
-						class:bg-muted={path.startsWith('/dashboard/admin')}
-					>
-						<DatabaseZap class="h-4 w-4" />
-						Admin
 					</a>
 					<Separator class="my-4 w-full" />
 					<button
@@ -140,6 +139,15 @@
 						Products
 					</a>
 					<a
+						href="/dashboard/branding"
+						class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+						class:text-foreground={path.startsWith('/dashboard/branding')}
+						class:bg-muted={path.startsWith('/dashboard/branding')}
+					>
+						<Image class="h-4 w-4" />
+						Branding
+					</a>
+					<a
 						href="/dashboard/settings"
 						class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
 						class:text-foreground={path.startsWith('/dashboard/settings')}
@@ -148,15 +156,7 @@
 						<Cog class="h-4 w-4" />
 						Settings
 					</a>
-					<a
-						href="/dashboard/admin"
-						class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-						class:text-foreground={path.startsWith('/dashboard/admin')}
-						class:bg-muted={path.startsWith('/dashboard/admin')}
-					>
-						<DatabaseZap class="h-4 w-4" />
-						Admin
-					</a>
+
 					<Separator class="my-4 w-full" />
 					<button
 						class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
