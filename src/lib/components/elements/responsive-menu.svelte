@@ -20,7 +20,6 @@
 	import SupportDialog from '$lib/components/elements/support-dialog.svelte';
 
 	let { children, path }: { children: Snippet; path: string } = $props();
-	let relevantPaths: string[] = $derived(path.split('/').slice(2));
 
 	const signOut = async () => {
 		await fetch('/auth', { method: 'DELETE' });
@@ -28,13 +27,16 @@
 		goto('/auth');
 	};
 
-	function calculateBreadcrumbPath(index: number): string {
-		let path = '/dashboard';
-		for (let i = 0; i <= index; i++) {
-			path += '/' + relevantPaths[i];
+	const calculateBreadcrumbPath = (index: number) => {
+		const splitPaths = path.split('/');
+		splitPaths.shift();
+		console.log(splitPaths);
+		let newPath = '/';
+		for (let i = 0; i < index; i++) {
+			newPath += splitPaths[i];
 		}
-		return path;
-	}
+		return newPath;
+	};
 </script>
 
 <div class="grid min-h-screen w-full md:grid-cols-[280px_1fr]">
@@ -186,13 +188,13 @@
 					</Sheet.Trigger>
 					<Breadcrumb.Root>
 						<Breadcrumb.List>
-							{#each relevantPaths as slug, index}
+							{#each path.split('/') as slug, index}
 								<Breadcrumb.Item class="text-lg">
 									<Breadcrumb.Link href={calculateBreadcrumbPath(index)}
 										>{slug.charAt(0).toUpperCase() + slug.slice(1)}</Breadcrumb.Link
 									>
 								</Breadcrumb.Item>
-								{#if index !== relevantPaths.length - 1}
+								{#if index !== path.split('/').length - 1 && index != 0}
 									<Breadcrumb.Separator>
 										<Slash tabindex="-1" />
 									</Breadcrumb.Separator>
