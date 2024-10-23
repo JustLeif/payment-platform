@@ -9,7 +9,7 @@ export const users = sqliteTable(
 			.$defaultFn(() => crypto.randomUUID()),
 		payoutAddress: text('payout_address'),
 		createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
-		email: text('email').notNull(),
+		email: text('email').notNull().unique(),
 		emailNotifications: integer('email_notifications', { mode: 'boolean' }).default(true)
 	},
 	(table) => {
@@ -29,4 +29,15 @@ export const authOtps = sqliteTable('auth_otps', {
 	createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 	/** expiration is always set 5 minutes after OTP creation. */
 	expiration: integer('expiration', { mode: 'timestamp' }).default(sql`(unixepoch() + (5 * 60))`)
+});
+
+export const products = sqliteTable('products', {
+	id: text('id', { length: 36 })
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
+	name: text('name'),
+	ownerId: text('owner_id').references(() => users.id),
+	asset: text('asset', { enum: ['lovelace', 'ada'] }).notNull(),
+	amount: integer('amount').notNull(),
+	webhookUrl: text('webhook_url')
 });
