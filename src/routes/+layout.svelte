@@ -3,6 +3,7 @@
 	let { children } = $props();
 
 	import { Toaster } from '$lib/components/shadcn/ui/sonner';
+
 	import { onNavigate } from '$app/navigation';
 
 	// View transition for chrome.

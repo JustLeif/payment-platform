@@ -29,7 +29,6 @@
 	const calculateBreadcrumbPath = (index: number) => {
 		const splitPaths = path.split('/');
 		splitPaths.shift();
-		console.log(splitPaths);
 		let newPath = '/';
 		for (let i = 0; i < index; i++) {
 			newPath += splitPaths[i];
