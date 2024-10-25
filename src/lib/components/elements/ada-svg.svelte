@@ -1,6 +1,20 @@
 <script lang="ts">
 	import { cn } from '$lib/components/shadcn/utils.js';
-	let { className }: { className: string } = $props();
+	let { className, fillPrimary }: { className: string; fillPrimary?: boolean } = $props();
+	let fillColor = $state('');
+	import { browser } from '$app/environment';
+	if (browser) {
+		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+		if (fillPrimary === false || fillPrimary === undefined) {
+			if (prefersDarkScheme.matches) {
+				fillColor = 'fill-white';
+			} else {
+				fillColor = 'fill-black';
+			}
+		} else {
+			fillColor = 'fill-primary';
+		}
+	}
 </script>
 
 <svg
@@ -8,20 +22,8 @@
 	height="256px"
 	viewBox="0 -76 2000 2000"
 	xmlns="http://www.w3.org/2000/svg"
-	class={cn(className, 'cls-1')}
+	class={cn(className, fillColor, 'cls-1')}
 >
-	<defs
-		><style>
-			.cls-1 {
-				fill: black;
-			}
-			@media (prefers-color-scheme: dark) {
-				.cls-1 {
-					fill: white;
-				}
-			}
-		</style></defs
-	>
 	<g id="SVGRepo_bgCarrier" stroke-width="0" />
 
 	<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />

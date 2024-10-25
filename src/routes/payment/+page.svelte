@@ -1,11 +1,11 @@
 <script lang="ts">
 	import AdaSvg from '$lib/components/elements/ada-svg.svelte';
-	import Button from '$lib/components/shadcn/ui/button/button.svelte';
 	import * as Card from '$lib/components/shadcn/ui/card/index.js';
 	import Separator from '$lib/components/shadcn/ui/separator/separator.svelte';
 	import { browser } from '$app/environment';
 	import Skeleton from '$lib/components/shadcn/ui/skeleton/skeleton.svelte';
 	import { type Wallet } from '@meshsdk/core';
+	import Label from '$lib/components/shadcn/ui/label/label.svelte';
 
 	let wallets: Wallet[] | null = $state(null);
 	if (browser) {
@@ -59,12 +59,12 @@
 							>25.128 <AdaSvg className={'pl-1 h-6 w-6'} /></span
 						>
 					</li>
-					<li class="flex items-center justify-between font-semibold">
-						<span class="text-muted-foreground">Total</span>
+					<li class="flex items-center justify-between font-semibold text-primary">
+						<span>Total</span>
 						<span class="inline-flex items-center">
 							770.586374
 
-							<AdaSvg className={'pl-1 h-6 w-6'} /></span
+							<AdaSvg className={'pl-1 h-6 w-6'} fillPrimary={true} /></span
 						>
 					</li>
 				</ul>
@@ -78,7 +78,7 @@
 				<Card.Content>
 					<ul class="grid gap-3">
 						<li class="flex items-center justify-between">
-							<span class="text-muted-foreground">
+							<span class="text-muted-foreground pr-4">
 								Chain Webhook Events x <span>429</span>
 							</span>
 							<span class="inline-flex items-center"
@@ -108,11 +108,10 @@
 							>
 						</li>
 						<li class="flex items-center justify-between font-semibold">
-							<span class="text-muted-foreground">Total</span>
-							<span class="inline-flex items-center">
+							<span class="text-primary">Total</span>
+							<span class="inline-flex items-center text-primary">
 								770.586374
-
-								<AdaSvg className={'pl-1 h-6 w-6'} /></span
+								<AdaSvg fillPrimary={true} className={'pl-1 h-6 w-6'} /></span
 							>
 						</li>
 					</ul>
@@ -120,17 +119,16 @@
 			</Card.Root>
 
 			{#if wallets === null}
-				<div class="flex items-center space-x-4">
-					<Skeleton class="h-12 w-12 rounded-full" />
-					<div class="space-y-2">
-						<Skeleton class="h-4 w-[250px]" />
-						<Skeleton class="h-4 w-[200px]" />
-					</div>
+				<Label class="text-muted-foreground">Loading Cryptography Libraries...</Label>
+				<div class="flex flex-wrap justify-center gap-4">
+					<Skeleton class="h-36 w-36 rounded-lg" />
+					<Skeleton class="h-36 w-36 rounded-lg" />
+					<Skeleton class="h-36 w-36 rounded-lg" />
 				</div>
 			{:else}
-				<div class="grid grid-cols-3">
+				<div class="flex flex-wrap justify-center gap-4">
 					{#each wallets as wallet}
-						<Card.Root class="hover:cursor-pointer m-2 hover:bg-muted">
+						<Card.Root class="hover:cursor-pointer hover:bg-muted">
 							<Card.Content
 								><img class="h-24 w-24" src={wallet.icon} alt={wallet.name} /></Card.Content
 							>
@@ -138,18 +136,6 @@
 					{/each}
 				</div>
 			{/if}
-
-			<p class="text-muted-foreground px-8 text-center text-sm">
-				By clicking continue, you agree to our
-				<a href="/terms" class="hover:text-primary underline underline-offset-4">
-					Terms of Service
-				</a>
-				and
-				<a href="/privacy" class="hover:text-primary underline underline-offset-4">
-					Privacy Policy
-				</a>
-				.
-			</p>
 		</div>
 	</div>
 </div>
